@@ -28,7 +28,7 @@ const Checkout = () => {
     console.log('Order placed:', formData);
     // Simulate payment processing
     setTimeout(() => {
-      window.location.href = '/invoice';
+      window.location.href = '/custom-build-demo/invoice';
     }, 1000);
   };
 

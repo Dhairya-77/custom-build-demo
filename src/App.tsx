@@ -40,26 +40,26 @@ const App = () => (
           <Navbar />
           <main className="flex-1">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/search-parts" element={<SearchParts />} />
-              <Route path="/build-pc" element={<BuildPC />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/readymade" element={<Readymade />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/invoice" element={<Invoice />} />
-              <Route path="/track-order" element={<TrackOrder />} />
-              <Route path="/complaint" element={<Complaint />} />
-              <Route path="/repair" element={<Repair />} />
-              <Route path="/showroom-build" element={<ShowroomBuild />} />
+              <Route path="/custom-build-demo/" element={<Home />} />
+              <Route path="/custom-build-demo/login" element={<Login />} />
+              <Route path="/custom-build-demo/signup" element={<Signup />} />
+              <Route path="/custom-build-demo/forgot-password" element={<ForgotPassword />} />
+              <Route path="/custom-build-demo/profile" element={<Profile />} />
+              <Route path="/custom-build-demo/search-parts" element={<SearchParts />} />
+              <Route path="/custom-build-demo/build-pc" element={<BuildPC />} />
+              <Route path="/custom-build-demo/cart" element={<Cart />} />
+              <Route path="/custom-build-demo/readymade" element={<Readymade />} />
+              <Route path="/custom-build-demo/checkout" element={<Checkout />} />
+              <Route path="/custom-build-demo/invoice" element={<Invoice />} />
+              <Route path="/custom-build-demo/track-order" element={<TrackOrder />} />
+              <Route path="/custom-build-demo/complaint" element={<Complaint />} />
+              <Route path="/custom-build-demo/repair" element={<Repair />} />
+              <Route path="/custom-build-demo/showroom-build" element={<ShowroomBuild />} />
               <Route path="/inventory" element={<Inventory />} />
-              <Route path="/resell" element={<ResellPC />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/custom-build-demo/resell" element={<ResellPC />} />
+              <Route path="/custom-build-demo/contact" element={<Contact />} />
+              <Route path="/custom-build-demo/terms" element={<Terms />} />
+              <Route path="/custom-build-demo/privacy" element={<Privacy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

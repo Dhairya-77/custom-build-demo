@@ -78,7 +78,7 @@ const Invoice = () => {
               <Download className="h-5 w-5" />
               Download Invoice
             </button>
-            <Link to="/" className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
+            <Link to="/custom-build-demo/" className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
               Back to Home
             </Link>
           </div>

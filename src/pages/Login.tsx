@@ -18,7 +18,7 @@ const Login = () => {
     if (formData.email && formData.password) {
       alert('Login successful! (Demo)');
       // Navigate to build PC page after successful login
-      navigate('/build-pc');
+      navigate('/custom-build-demo/build-pc');
     } else {
       alert('Please enter both email and password');
     }
@@ -113,7 +113,7 @@ const Login = () => {
               </label>
             </div>
 
-            <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
+            <Link to="/custom-build-demo/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
               Forgot your password?
             </Link>
           </div>
@@ -128,7 +128,7 @@ const Login = () => {
 
           <div className="text-center">
             <span className="text-gray-600">Don't have an account? </span>
-            <Link to="/signup" className="text-blue-600 hover:text-blue-500 font-medium">
+            <Link to="/custom-build-demo/signup" className="text-blue-600 hover:text-blue-500 font-medium">
               Sign up here
             </Link>
           </div>

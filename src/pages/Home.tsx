@@ -16,7 +16,7 @@ const Home = () => {
               Custom PCs, Expert Repairs & Premium Components
             </p>
             <Link 
-              to="/build-pc"
+              to="/custom-build-demo/build-pc"
               className="bg-white text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center"
             >
               Start Building
@@ -33,7 +33,7 @@ const Home = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Build PC */}
-            <Link to="/build-pc" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Link to="/custom-build-demo/build-pc" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
                 <Laptop className="h-6 w-6 text-blue-600" />
               </div>
@@ -42,7 +42,7 @@ const Home = () => {
             </Link>
 
             {/* Browse Products */}
-            <Link to="/readymade" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Link to="/custom-build-demo/readymade" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
                 <Search className="h-6 w-6 text-green-600" />
               </div>
@@ -51,7 +51,7 @@ const Home = () => {
             </Link>
 
             {/* Track Orders */}
-            <Link to="/track-order" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Link to="/custom-build-demo/track-order" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-200 transition-colors">
                 <Truck className="h-6 w-6 text-purple-600" />
               </div>
@@ -60,7 +60,7 @@ const Home = () => {
             </Link>
 
             {/* Repair Service */}
-            <Link to="/repair" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Link to="/custom-build-demo/repair" className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-200 transition-colors">
                 <Wrench className="h-6 w-6 text-red-600" />
               </div>
@@ -80,7 +80,7 @@ const Home = () => {
               <h3 className="text-2xl font-bold mb-4">Resell Your PC</h3>
               <p className="mb-6">Get the best value for your old computer. We offer fair prices and hassle-free service.</p>
               <Link 
-                to="/resell"
+                to="/custom-build-demo/resell"
                 className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 Start Reselling
@@ -92,7 +92,7 @@ const Home = () => {
               <h3 className="text-2xl font-bold mb-4">Need Help?</h3>
               <p className="mb-6">Our expert team is ready to assist you with any questions or custom requirements.</p>
               <Link 
-                to="/contact"
+                to="/custom-build-demo/contact"
                 className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 Contact Us

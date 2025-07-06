@@ -25,10 +25,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/build-pc" className="text-gray-400 hover:text-white transition-colors">Build PC</Link></li>
-              <li><Link to="/readymade" className="text-gray-400 hover:text-white transition-colors">Products</Link></li>
-              <li><Link to="/repair" className="text-gray-400 hover:text-white transition-colors">Repair Service</Link></li>
-              <li><Link to="/resell" className="text-gray-400 hover:text-white transition-colors">Resell PC</Link></li>
+              <li><Link to="/custom-build-demo/build-pc" className="text-gray-400 hover:text-white transition-colors">Build PC</Link></li>
+              <li><Link to="/custom-build-demo/readymade" className="text-gray-400 hover:text-white transition-colors">Products</Link></li>
+              <li><Link to="/custom-build-demo/repair" className="text-gray-400 hover:text-white transition-colors">Repair Service</Link></li>
+              <li><Link to="/custom-build-demo/resell" className="text-gray-400 hover:text-white transition-colors">Resell PC</Link></li>
             </ul>
           </div>
 
@@ -36,10 +36,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2">
-              <li><Link to="/track-order" className="text-gray-400 hover:text-white transition-colors">Track Order</Link></li>
-              <li><Link to="/complaint" className="text-gray-400 hover:text-white transition-colors">Complaints</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
-              <li><Link to="/terms" className="text-gray-400 hover:text-white transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/custom-build-demo/track-order" className="text-gray-400 hover:text-white transition-colors">Track Order</Link></li>
+              <li><Link to="/custom-build-demo/complaint" className="text-gray-400 hover:text-white transition-colors">Complaints</Link></li>
+              <li><Link to="/custom-build-demo/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+              <li><Link to="/custom-build-demo/terms" className="text-gray-400 hover:text-white transition-colors">Terms & Conditions</Link></li>
             </ul>
           </div>
         </div>
