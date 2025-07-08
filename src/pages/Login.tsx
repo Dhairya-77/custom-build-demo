@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Lock } from 'lucide-react';
@@ -13,14 +12,20 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Login attempt:', formData);
-    
-    // Demo login - accept any credentials or use dummy ones
-    if (formData.email && formData.password) {
+
+    // Check for admin credentials
+    if (formData.email === 'admin@premiumsales.com' && formData.password === 'admin') {
+      alert('Admin login successful!');
+      navigate('/custom-build-demo/admin/dashboard');
+    } 
+    // Check for demo user
+    else if (formData.email === 'demo@premiumsales.com' && formData.password === 'demo123') {
       alert('Login successful! (Demo)');
-      // Navigate to build PC page after successful login
       navigate('/custom-build-demo/build-pc');
-    } else {
-      alert('Please enter both email and password');
+    } 
+    // Invalid credentials
+    else {
+      alert('Invalid email or password');
     }
   };
 
@@ -33,8 +38,15 @@ const Login = () => {
 
   const handleDemoLogin = () => {
     setFormData({
-      email: 'demo@techbuilder.com',
+      email: 'demo@premiumsales.com',
       password: 'demo123'
+    });
+  };
+
+  const handleAdminLogin = () => {
+    setFormData({
+      email: 'admin@premiumsales.com',
+      password: 'admin'
     });
   };
 
@@ -46,14 +58,14 @@ const Login = () => {
             <User className="h-8 w-8 text-white" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900">Sign in to your account</h2>
-          <p className="mt-2 text-gray-600">Welcome back to TechBuilder</p>
+          <p className="mt-2 text-gray-600">Welcome back to Premium Sales Corporation</p>
         </div>
 
         {/* Demo Credentials Info */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <h4 className="font-medium text-blue-900 mb-2">Demo Credentials:</h4>
           <div className="text-sm text-blue-800 space-y-1">
-            <p><strong>Email:</strong> demo@techbuilder.com</p>
+            <p><strong>Email:</strong> demo@premiumsales.com</p>
             <p><strong>Password:</strong> demo123</p>
             <button
               type="button"
@@ -61,6 +73,22 @@ const Login = () => {
               className="mt-2 text-blue-600 hover:text-blue-800 underline text-sm"
             >
               Click to fill demo credentials
+            </button>
+          </div>
+        </div>
+
+        {/* Admin Credentials Info */}
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <h4 className="font-medium text-green-900 mb-2">Admin Credentials:</h4>
+          <div className="text-sm text-green-800 space-y-1">
+            <p><strong>Email:</strong> admin@premiumsales.com</p>
+            <p><strong>Password:</strong> admin</p>
+            <button
+              type="button"
+              onClick={handleAdminLogin}
+              className="mt-2 text-green-600 hover:text-green-800 underline text-sm"
+            >
+              Click to fill admin credentials
             </button>
           </div>
         </div>

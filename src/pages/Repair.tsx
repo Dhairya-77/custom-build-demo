@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { Wrench, Upload } from 'lucide-react';
+import { useRepairs } from '../context/RepairContext';
+import { v4 as uuidv4 } from 'uuid';
 
 const Repair = () => {
   const [formData, setFormData] = useState({
@@ -10,23 +12,43 @@ const Repair = () => {
     image: null
   });
 
-  const handleSubmit = (e) => {
+  const { addRepair } = useRepairs();
+
+ const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Repair request submitted:', formData);
+
+    const newRepair = {
+      id: uuidv4(),
+      productType: formData.productType,
+      warranty: formData.warranty,
+      description: formData.description,
+      image: formData.image
+    };
+
+    addRepair(newRepair);
     alert('Repair request submitted successfully! We will contact you soon.');
     setFormData({ productType: '', warranty: '', description: '', image: null });
   };
 
-  const handleChange = (e) => {
+ const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
+  const handleImageChange = (e) => {
+    setFormData({
+      ...formData,
+      image: e.target.files[0]
+    });
+  };
+
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-2xl mx-auto px-4">
+
         <div className="text-center mb-8">
           <Wrench className="h-16 w-16 text-blue-500 mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Request Repair Service</h1>
@@ -35,6 +57,7 @@ const Repair = () => {
 
         <div className="bg-white rounded-lg shadow-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
+
             <div>
               <label htmlFor="productType" className="block text-sm font-medium text-gray-700 mb-2">
                 Product Type
@@ -100,15 +123,16 @@ const Repair = () => {
               />
             </div>
 
-            <div>
+             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Upload Image (Optional)
               </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                <Upload className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-600">Click to upload or drag and drop</p>
-                <input type="file" className="hidden" accept="image/*" />
-              </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              />
             </div>
 
             <button

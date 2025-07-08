@@ -13,7 +13,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">PC</span>
               </div>
-              <span className="text-xl font-bold">TechBuilder</span>
+              <span className="text-xl font-bold">Premium Sales Corporation</span>
             </div>
             <p className="text-gray-400 mb-4">
               Your trusted partner for custom PC builds, repairs, and premium computer solutions. 
@@ -46,7 +46,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 TechBuilder. All rights reserved. Built with passion for technology.
+            © 2025 Premium Sales Corporation. All rights reserved. Built with passion for technology.
           </p>
         </div>
       </div>

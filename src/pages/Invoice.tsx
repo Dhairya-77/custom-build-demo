@@ -2,21 +2,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Download, CheckCircle } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+
 
 const Invoice = () => {
-  const orderData = {
-    orderId: 'INV12345',
-    customerName: 'John Doe',
-    items: [
-      { name: 'Intel Core i5 10th Gen', price: 12500 },
-      { name: '16GB DDR4 RAM', price: 4500 },
-      { name: '1TB SSD', price: 6500 }
-    ],
-    subtotal: 23500,
-    gst: 4230,
-    sgst: 4230,
-    total: 31960
-  };
+  const { order } = useCart();
+
+  if (!order) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>No invoice data found.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -33,11 +31,11 @@ const Invoice = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-gray-600">Order ID</p>
-                <p className="font-semibold">{orderData.orderId}</p>
+                <p className="font-semibold">{order.orderId}</p>
               </div>
               <div>
                 <p className="text-gray-600">Customer Name</p>
-                <p className="font-semibold">{orderData.customerName}</p>
+                <p className="font-semibold">{order.customerName}</p>
               </div>
             </div>
           </div>
@@ -45,7 +43,7 @@ const Invoice = () => {
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-4">Items Ordered</h3>
             <div className="space-y-3">
-              {orderData.items.map((item, index) => (
+              {order.items.map((item, index) => (
                 <div key={index} className="flex justify-between items-center py-2 border-b">
                   <span>{item.name}</span>
                   <span className="font-semibold">₹{item.price.toLocaleString()}</span>
@@ -57,19 +55,15 @@ const Invoice = () => {
           <div className="border-t pt-4 space-y-2">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>₹{orderData.subtotal.toLocaleString()}</span>
+              <span>₹{order.subtotal.toLocaleString()}</span>
             </div>
             <div className="flex justify-between">
               <span>GST (18%)</span>
-              <span>₹{orderData.gst.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>SGST (18%)</span>
-              <span>₹{orderData.sgst.toLocaleString()}</span>
+              <span>₹{order.gst.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-xl font-bold border-t pt-2">
               <span>Total Amount</span>
-              <span>₹{orderData.total.toLocaleString()}</span>
+              <span>₹{order.total.toLocaleString()}</span>
             </div>
           </div>
 

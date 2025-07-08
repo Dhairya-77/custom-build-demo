@@ -49,8 +49,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                  <p className="text-gray-600">+91 98765 43210</p>
-                  <p className="text-gray-600">+91 87654 32109</p>
+                  <p className="text-gray-600">0261-2480801</p>
                 </div>
               </div>
 
@@ -60,8 +59,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                  <p className="text-gray-600">info@techbuilder.com</p>
-                  <p className="text-gray-600">support@techbuilder.com</p>
+                  <p className="text-gray-600">psc@premiumitware.com</p>
                 </div>
               </div>
 
@@ -72,9 +70,8 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
                   <p className="text-gray-600">
-                    123 Tech Street<br />
-                    Electronics Market<br />
-                    Mumbai, Maharashtra 400001
+                    B-760, Kumbhar Faliyu, Behind Katargam Post Office Surat – 395004<br />
+                    (Gujarat), India
                   </p>
                 </div>
               </div>
@@ -83,8 +80,8 @@ const Contact = () => {
             <div className="bg-blue-50 p-6 rounded-lg">
               <h3 className="font-semibold text-gray-900 mb-2">Business Hours</h3>
               <div className="text-gray-600 space-y-1">
-                <p>Monday - Saturday: 10:00 AM - 8:00 PM</p>
-                <p>Sunday: 11:00 AM - 6:00 PM</p>
+                <p>Monday - Saturday: 09:30 AM - 8:00 PM</p>
+                <p>Sunday: 10:00 AM - 12:30 PM</p>
               </div>
             </div>
           </div>

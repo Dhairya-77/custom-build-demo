@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { Upload, DollarSign, Camera, CheckCircle } from 'lucide-react';
+import { useResellPC } from '../context/ResellPCContext';
 
 const ResellPC = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +19,7 @@ const ResellPC = () => {
   });
 
   const [images, setImages] = useState([]);
+  const { addResellPC } = useResellPC();
 
   const handleInputChange = (e) => {
     setFormData({
@@ -27,11 +28,55 @@ const ResellPC = () => {
     });
   };
 
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    setImages(files);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Resell form submitted:', formData);
+
+    // Contact number validation (10 digits only)
+    const contactRegex = /^\d{10}$/;
+    if (!contactRegex.test(formData.contactNumber)) {
+      alert("Please enter a valid 10-digit contact number.");
+      return;
+    }
+
+
+    if (images.length === 0) {
+      alert("Please upload at least one photo of your PC.");
+      return;
+    }
+
+    const newResellPC = {
+      ...formData,
+      images
+    };
+
+    addResellPC(newResellPC);
+
+    console.log('Resell form submitted:', newResellPC);
     alert('Your PC has been submitted for evaluation! We will contact you within 24 hours.');
+
+    // Reset form
+    setFormData({
+      brand: '',
+      model: '',
+      year: '',
+      condition: '',
+      processor: '',
+      ram: '',
+      storage: '',
+      graphics: '',
+      description: '',
+      expectedPrice: '',
+      contactNumber: '',
+      email: ''
+    });
+    setImages([]);
   };
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -64,7 +109,7 @@ const ResellPC = () => {
         {/* Form */}
         <div className="bg-white rounded-lg shadow-md p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">PC Details</h2>
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -204,11 +249,25 @@ const ResellPC = () => {
                   type="tel"
                   name="contactNumber"
                   value={formData.contactNumber}
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    // Allow only numbers
+                    const value = e.target.value.replace(/\D/g, '');
+                    setFormData({
+                      ...formData,
+                      contactNumber: value
+                    });
+                  }}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Your phone number"
                   required
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                  minLength={10}
+                  inputMode="numeric"
                 />
+
+
+
               </div>
             </div>
 
@@ -237,20 +296,31 @@ const ResellPC = () => {
               />
             </div>
 
-            {/* Photo Upload Placeholder */}
+            {/* Photo Upload */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">PC Photos (Optional)</label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                <Camera className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">Upload photos of your PC</p>
-                <p className="text-sm text-gray-400">Clear photos help us provide better quotes</p>
-                <button
-                  type="button"
-                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Choose Photos
-                </button>
-              </div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">PC Photos (Required)</label>
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImageUpload}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+
+              {/* Preview */}
+              {images.length > 0 && (
+                <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {images.map((img, index) => (
+                    <img
+                      key={index}
+                      src={URL.createObjectURL(img)}
+                      alt={`PC ${index}`}
+                      className="w-full h-32 object-cover rounded"
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
             <button

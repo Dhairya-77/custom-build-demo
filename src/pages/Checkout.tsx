@@ -1,41 +1,123 @@
-
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { CreditCard, MapPin, User, Phone } from 'lucide-react';
+import { CreditCard, MapPin, User } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { useParts } from '../context/PartsContext';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
+    pincode: '',
     address: '',
     city: '',
-    pincode: '',
     paymentMethod: 'card'
   });
 
-  const orderItems = [
-    { name: 'Custom PC Build', price: 59000, quantity: 1 },
-    { name: 'Gaming Laptop', price: 65000, quantity: 1 }
-  ];
+  const { cart, clearCart, setOrder } = useCart();
+ const { parts, removePartsByIds, removeReadyMadePCsByIds, markProductsAsSold } = useParts();
 
-  const subtotal = 124000;
+  const navigate = useNavigate();
+
+  // Calculate totals
+  const subtotal = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
   const gst = Math.round(subtotal * 0.18);
   const total = subtotal + gst;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Order placed:', formData);
-    // Simulate payment processing
+
+    // ✅ Step 1: Categorize cart items by type
+    const partIds = cart.filter(item => item.type === 'part').map(item => item.id);
+    const builtPCIds = cart.filter(item => item.type === 'built').map(item => item.id);
+    const readyMadePCIds = cart.filter(item => item.type === 'readymade').map(item => item.id);
+
+    // ✅ Step 2: For built PCs, we need to mark individual parts as sold
+    const builtPCParts: string[] = [];
+    cart.forEach(item => {
+      if (item.type === 'built' && item.parts) {
+        // Extract part IDs from built PC (you might need to adjust this based on your data structure)
+        item.parts.forEach(partName => {
+          // Find the actual part ID by name (this might need adjustment based on your data)
+          const foundPart = parts.find(p => p.name === partName);
+          if (foundPart) {
+            builtPCParts.push(foundPart.id);
+          }
+        });
+      }
+    });
+
+    // ✅ Step 3: Mark all purchased products as sold
+    const allPurchasedIds = [
+      ...partIds,
+      ...readyMadePCIds,
+      ...builtPCParts
+    ];
+
+    if (allPurchasedIds.length > 0) {
+      markProductsAsSold(allPurchasedIds);
+    }
+
+    // ✅ Step 4: Remove products from available lists
+    if (partIds.length > 0 || builtPCParts.length > 0) {
+      removePartsByIds([...partIds, ...builtPCParts]);
+    }
+    
+    if (readyMadePCIds.length > 0) {
+      removeReadyMadePCsByIds(readyMadePCIds);
+    }
+
+    // ✅ Step 5: Create order record
+    setOrder({
+      orderId: 'INV' + Date.now(),
+      customerName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      city: formData.city,
+      pincode: formData.pincode,
+      paymentMethod: formData.paymentMethod,
+      items: cart,
+      subtotal,
+      gst,
+      total
+    });
+
+    // ✅ Step 6: Clear cart and redirect
+    clearCart();
+    
+    // Show success message
+    alert(`Order placed successfully! Order ID: INV${Date.now()}`);
+    
     setTimeout(() => {
-      window.location.href = '/custom-build-demo/invoice';
-    }, 1000);
+      navigate('/custom-build-demo/invoice');
+    }, 500);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    let updatedValue = value;
+
+    // Enforce only digits for phone and pincode fields
+    if (name === "phone") {
+      updatedValue = value.replace(/\D/g, "");
+      if (updatedValue.length > 10) {
+        updatedValue = updatedValue.slice(0, 10);
+      }
+    }
+
+    if (name === "pincode") {
+      updatedValue = value.replace(/\D/g, "");
+      if (updatedValue.length > 6) {
+        updatedValue = updatedValue.slice(0, 6);
+      }
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: updatedValue
     });
   };
 
@@ -160,7 +242,7 @@ const Checkout = () => {
                       value="cod"
                       checked={formData.paymentMethod === 'cod'}
                       onChange={handleInputChange}
-                      className="mr-3"
+                      className="mr-3 "
                     />
                     <span>Cash on Delivery</span>
                   </label>
@@ -179,13 +261,13 @@ const Checkout = () => {
           {/* Order Summary */}
           <div className="bg-white rounded-lg shadow-md p-6 h-fit">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
-            
+
             <div className="space-y-4 mb-6">
-              {orderItems.map((item, index) => (
+              {cart.map((item, index) => (
                 <div key={index} className="flex justify-between">
                   <div>
                     <p className="font-medium">{item.name}</p>
-                    <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                    <p className="text-sm text-gray-500">Qty: {item.quantity || 1}</p>
                   </div>
                   <p className="font-medium">₹{item.price.toLocaleString()}</p>
                 </div>

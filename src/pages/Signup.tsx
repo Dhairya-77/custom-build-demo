@@ -36,7 +36,6 @@ const Signup = () => {
             <User className="h-8 w-8 text-white" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900">Create your account</h2>
-          <p className="mt-2 text-gray-600">Join TechBuilder today</p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

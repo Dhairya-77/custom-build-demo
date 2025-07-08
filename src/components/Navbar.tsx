@@ -1,13 +1,20 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
+
+//===================================================================================================
+import { useCart } from "../context/CartContext";
+//===================================================================================================
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
+
+  //===================================================================================================
+  const { cart } = useCart(); // ✅ get cart from context
+  //===================================================================================================
 
   return (
     <nav className="bg-white shadow-lg border-b">
@@ -18,7 +25,7 @@ const Navbar = () => {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">PC</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">TechBuilder</span>
+            <span className="text-xl font-bold text-gray-900">Premium Sales Corporation</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -62,12 +69,18 @@ const Navbar = () => {
             <Link to="/custom-build-demo/search-parts" className="p-2 text-gray-600 hover:text-blue-600 transition-colors">
               <Search className="h-5 w-5" />
             </Link>
+
             <Link to="/custom-build-demo/cart" className="p-2 text-gray-600 hover:text-blue-600 transition-colors relative">
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                2
-              </span>
+
+              {/* ✅ Dynamic Cart Count Badge */}
+              {cart.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cart.length}
+                </span>
+              )}
             </Link>
+
             <Link to="/custom-build-demo/login" className="p-2 text-gray-600 hover:text-blue-600 transition-colors">
               <User className="h-5 w-5" />
             </Link>
